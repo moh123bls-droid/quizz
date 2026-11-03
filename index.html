@@ -111,16 +111,20 @@
 
 /* Result */
 #fhq .fh-r-head { background: var(--forest-deep); color: #FFFDF8; padding: 26px 20px 22px; }
-#fhq .fh-r-head small { font-size: 13.5px; font-weight: 600; color: var(--gold); }
-#fhq .fh-r-head h2 { font-size: clamp(28px, 7.6vw, 34px); line-height: 1.25; margin-top: 2px; color: #FFFDF8; }
-#fhq .fh-map { margin-top: 18px; position: relative; display: grid; gap: 10px; }
-#fhq .fh-map::before { content: ''; position: absolute; top: 12px; bottom: 12px; right: 6px; border-right: 2px dotted rgba(255,255,255,.3); }
-#fhq .fh-map-row { position: relative; display: flex; align-items: center; gap: 12px; }
-#fhq .fh-dot { width: 14px; height: 14px; flex: none; border-radius: 50%; border: 2px solid var(--forest-deep); box-sizing: content-box; margin: -2px; }
-#fhq .l0 .fh-dot { background: #8DB27C; } #fhq .l1 .fh-dot { background: var(--gold); } #fhq .l2 .fh-dot { background: #E2714C; }
-#fhq .fh-map-row b { font-weight: 600; font-size: 15px; flex: 1; color: #FFFDF8; }
-#fhq .fh-map-row span { font-size: 13.5px; color: #D7E0D2; }
-#fhq .l2 span { color: #F4B49D; font-weight: 600; }
+#fhq .fh-ready { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px 4px 10px; border-radius: 100px; background: rgba(199, 161, 95, .16); color: var(--gold); font-size: 13px; font-weight: 700; }
+#fhq .fh-ready::before { content: ''; width: 4px; height: 8px; border: solid currentColor; border-width: 0 2px 2px 0; transform: rotate(45deg) translateY(-1px); }
+#fhq .fh-r-head h2 { font-size: clamp(25px, 7vw, 31px); line-height: 1.3; margin-top: 12px; color: #FFFDF8; }
+#fhq .fh-r-sub { margin-top: 6px; font-size: 15px; line-height: 1.6; color: #C9D5C4; }
+#fhq .fh-map { margin-top: 18px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+#fhq .fh-z { padding: 10px 10px 9px; border-radius: 12px; background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .1); }
+#fhq .fh-z b { display: block; font-size: 14.5px; font-weight: 600; color: #FFFDF8; }
+#fhq .fh-meter { display: flex; gap: 3px; margin: 8px 0 7px; }
+#fhq .fh-meter i { flex: 1; height: 5px; border-radius: 3px; background: rgba(255, 255, 255, .16); }
+#fhq .l0 .fh-meter i:nth-child(1) { background: #8DB27C; }
+#fhq .l1 .fh-meter i:nth-child(-n+2) { background: var(--gold); }
+#fhq .l2 .fh-meter i { background: #E2714C; }
+#fhq .fh-st { display: block; font-size: 12.5px; font-weight: 600; line-height: 1.3; color: #A9C59C; }
+#fhq .l1 .fh-st { color: #E3C48C; } #fhq .l2 .fh-st { color: #F4A68B; }
 
 #fhq .fh-r-body { padding: 18px 20px 8px; display: grid; gap: 22px; }
 #fhq .fh-prod { background: var(--card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
@@ -425,10 +429,15 @@ function renderQuestion(i) {
   }
 
 var TITLES = {
-    scalpPack: 'الفروة أولاً، ثم الأطوال', scalpSolo: 'أصل الموضوع في فروتك',
-    hairPack: 'الجذور والأطوال تحتاجان عناية معاً', shampoo: 'الشامبو الأنسب لشعرك', mask: 'أطوالك هي الأولوية'
+    scalpPack: ['فروتكِ تحتاج علاجاً، وأطوالكِ ترطيباً', 'القشرة تحتاج شامبو مخصصاً لها، والبلسم يعتني بالأطوال الجافة.'],
+    scalpSolo: ['المشكلة في فروة رأسكِ فقط', 'أطوالكِ بخير، فيكفيكِ شامبو مخصص للقشرة.'],
+    hairPack: ['جذوركِ وأطوالكِ تحتاجان عناية معاً', 'الشامبو يقوي الجذور، والماسك يغذي الشعر حتى الأطراف.'],
+    shampoo: ['جذوركِ تحتاج تقوية', 'يكفيكِ الآن شامبو يقوي الجذور وينقي الفروة.'],
+    shampooDull: ['شعركِ يحتاج لمعاناً وحيوية', 'شامبو بزيت التين الشوكي والأركان يعيد لشعركِ لمعانه.'],
+    mask: ['أطوالكِ تحتاج تغذية وإصلاحاً', 'ماسك مغذٍّ يصلح الجفاف والتقصف ويعيد النعومة.']
   };
-  var LEVEL = ['بخير', 'تحتاج انتباهاً', 'أولوية'];
+  var LEVEL = ['جيدة', 'تحتاج عناية', 'أولوية'];
+  var mf = function (s) { return a.who === 'm' ? s.replace(/كِ/g, 'ك') : s; };
 
   function altCard(key, line) {
     var p = PRODUCTS[key];
@@ -440,6 +449,7 @@ var TITLES = {
 
   function renderResult() {
     var k = result, p = PRODUCTS[k], d = diagnose(a), lv = d.levels;
+    var head = TITLES[k === 'shampoo' && a.main === 'dull' ? 'shampooDull' : k];
     var why = reasons(k, d);
     var alts = '', altTitle = '';
     if (k === 'scalpPack') { altTitle = 'تفضّل البدء بالشامبو فقط؟'; alts = altCard('scalpSolo', 'شامبو القشرة وحده'); }
@@ -451,9 +461,10 @@ var TITLES = {
 
     shell.innerHTML =
       '<section class="fh-screen">' +
-      '<div class="fh-r-head"><small>خريطة شعرك</small><h2 tabindex="-1" id="fhTitle">' + TITLES[k] + '</h2><div class="fh-map">' +
+      '<div class="fh-r-head"><span class="fh-ready">' + g('تشخيصكِ جاهز', 'تشخيصك جاهز') + '</span>' +
+      '<h2 tabindex="-1" id="fhTitle">' + mf(head[0]) + '</h2><p class="fh-r-sub">' + mf(head[1]) + '</p><div class="fh-map">' +
       [['الفروة', lv.scalp], ['الجذور', lv.roots], ['الأطوال', lv.lengths]].map(function (z) {
-        return '<div class="fh-map-row l' + z[1] + '"><i class="fh-dot"></i><b>' + z[0] + '</b><span>' + LEVEL[z[1]] + '</span></div>';
+        return '<div class="fh-z l' + z[1] + '"><b>' + z[0] + '</b><span class="fh-meter"><i></i><i></i><i></i></span><span class="fh-st">' + LEVEL[z[1]] + '</span></div>';
       }).join('') + '</div></div>' +
       '<div class="fh-r-body">' +
       '<article class="fh-prod"><div class="fh-prod-img"><img src="' + p.img + '" alt="' + p.name + '" onerror="this.style.visibility=\'hidden\'"></div><div class="fh-prod-t"><small>' + p.kicker + '</small><h3>' + p.name + '</h3><p class="fh-ar">' + p.ar + '</p>' +
