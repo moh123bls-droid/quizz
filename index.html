@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#12302A">
+<title>Floré | تشخيص الشعر</title>
+<meta name="description" content="أجيبي على أسئلة قصيرة واكتشفي المنتج الأنسب لشعركِ من Floré.">
+<style>html, body { margin: 0; background: #F7F3EA; }</style>
+</head>
+<body><!-- ═══════════════════════════════════════════════════════════════
+     Floré — تشخيص الشعر / Hair Diagnosis Quiz  (Shopify embed fragment)
+     Paste this whole block into a Shopify "Custom Liquid" section
+     or a Custom HTML block. Do NOT wrap it in anything else.
+     Everything is scoped to #fhq so it cannot affect your theme.
+
+     To change a link, price or photo: edit the PRODUCTS block in the
+     script at the bottom. Nothing else needs touching.
+     ═══════════════════════════════════════════════════════════════ -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@600&family=El+Messiri:wght@600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap');
+
+#fhq {
+  --ink: #17302A; --forest: #1D4637; --forest-deep: #12302A; --moss: #5F7A52;
+  --sage: #DFE7D5; --sage-soft: #EEF2E7; --paper: #F7F3EA; --card: #FFFDF8;
+  --line: #E2DCCB; --muted: #5C6B64; --gold: #C7A15F; --clay: #A8452A; --clay-soft: #F6E4DB;
+  --display: 'El Messiri', 'IBM Plex Sans Arabic', 'Segoe UI', sans-serif;
+  --body: 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif;
+  direction: rtl; text-align: right; background: var(--paper); color: var(--ink);
+  font-family: var(--body); font-size: 16px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%;
+  padding: clamp(0px, 3vw, 32px) 0; scroll-margin-top: 80px;
+}
+#fhq *, #fhq *::before, #fhq *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+#fhq h1, #fhq h2, #fhq h3 { font-family: var(--display) !important; color: inherit; letter-spacing: 0; text-transform: none; font-weight: 700; }
+#fhq p { color: inherit; font-family: inherit; letter-spacing: 0; }
+#fhq button, #fhq a.fh-btn { font-family: var(--body) !important; letter-spacing: 0; text-transform: none; touch-action: manipulation; cursor: pointer; }
+#fhq button { appearance: none; -webkit-appearance: none; background: none; border: 0; color: inherit; min-width: 0; min-height: 0; box-shadow: none; text-align: inherit; }
+#fhq :focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+#fhq [tabindex="-1"]:focus { outline: none; }
+#fhq img { display: block; max-width: 100%; height: auto; }
+#fhq .fh-shell { width: 100%; max-width: 560px; margin: 0 auto; background: var(--paper); }
+@media (min-width: 600px) { #fhq .fh-shell { border-radius: 24px; border: 1px solid var(--line); overflow: clip; } }
+#fhq .fh-screen { animation: fh-in .35s ease both; }
+@keyframes fh-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* Primary button */
+#fhq .fh-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 54px; padding: 12px 22px; background: var(--forest) !important; color: #FFFDF8 !important; border-radius: 14px; font-size: 17px; font-weight: 700; text-decoration: none !important; text-align: center; transition: background .2s, transform .12s; }
+#fhq .fh-btn:active { transform: scale(.985); }
+#fhq .fh-btn:disabled { background: #BFC8BD !important; cursor: not-allowed; }
+@media (hover: hover) { #fhq .fh-btn:not(:disabled):hover { background: var(--forest-deep) !important; } }
+#fhq .fh-btn svg { width: 18px; height: 18px; flex: none; }
+#fhq .fh-btn--light { background: #FFFDF8 !important; color: var(--forest-deep) !important; }
+@media (hover: hover) { #fhq .fh-btn--light:not(:disabled):hover { background: var(--sage) !important; } }
+
+/* Landing */
+#fhq .fh-land { padding: 28px 22px 26px; text-align: center; }
+#fhq .fh-badge { display: inline-block; padding: 6px 15px; background: var(--sage); color: var(--forest-deep); border-radius: 100px; font-size: 13px; font-weight: 700; }
+#fhq .fh-logo { font-family: 'Bodoni Moda', Georgia, serif; font-weight: 600; font-size: 48px; line-height: 1; direction: ltr; text-align: center; color: var(--forest); margin: 22px 0 18px; }
+#fhq .fh-land h1 { font-size: clamp(29px, 8vw, 36px); line-height: 1.3; color: var(--ink); }
+#fhq .fh-land h1 span { white-space: nowrap; color: var(--forest); background: linear-gradient(transparent 68%, var(--sage) 68%); }
+#fhq .fh-lead { margin: 10px auto 20px; max-width: 28em; font-size: 16px; line-height: 1.7; color: var(--muted); }
+#fhq .fh-trustbar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 14px 6px; margin-bottom: 18px; background: var(--sage-soft); border-radius: 14px; }
+#fhq .fh-trustbar b { display: block; font-size: 17px; font-weight: 700; color: var(--forest); line-height: 1.3; }
+#fhq .fh-trustbar span { display: block; font-size: 12px; font-weight: 500; color: var(--muted); line-height: 1.35; margin-top: 2px; }
+#fhq .fh-meta { margin-top: 12px; font-size: 13px; color: var(--muted); text-align: center; }
+
+/* Question */
+#fhq .fh-q { padding: 18px 20px 28px; min-height: 560px; display: flex; flex-direction: column; }
+#fhq .fh-top { display: flex; align-items: center; gap: 12px; }
+#fhq .fh-back { width: 42px; height: 42px; flex: none; border-radius: 50%; display: grid; place-items: center; color: var(--forest); background: var(--sage-soft); }
+#fhq .fh-back svg { width: 18px; height: 18px; }
+#fhq .fh-strand { flex: 1; min-width: 0; width: 100%; height: 34px; display: block; overflow: visible; }
+#fhq .fh-strand .bg { fill: none; stroke: var(--line); stroke-width: 3; stroke-linecap: round; }
+#fhq .fh-strand .fg { fill: none; stroke: var(--forest); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 100; transition: stroke-dashoffset .6s cubic-bezier(.3,.7,.3,1); }
+#fhq .fh-strand .bulb { fill: var(--forest); }
+#fhq .fh-zone { margin-top: 22px; font-size: 13px; font-weight: 700; color: var(--moss); }
+#fhq .fh-q h2 { font-size: clamp(25px, 6.6vw, 30px); line-height: 1.32; margin-top: 2px; color: var(--ink); }
+#fhq .fh-hint { margin-top: 6px; font-size: 15px; color: var(--muted); }
+#fhq .fh-note { margin-top: 14px; padding: 10px 12px; font-size: 14px; line-height: 1.55; background: var(--sage-soft); border-inline-start: 3px solid var(--moss); border-radius: 4px; color: var(--ink); }
+#fhq .fh-opts { display: grid; gap: 10px; margin-top: 20px; }
+#fhq .fh-opt { display: flex; align-items: center; gap: 13px; width: 100%; min-height: 66px; padding: 11px 13px; background: var(--card) !important; border: 1.5px solid var(--line) !important; border-radius: 14px; transition: border-color .15s, background .15s; }
+@media (hover: hover) { #fhq .fh-opt:hover { border-color: var(--moss) !important; } }
+#fhq .fh-opt.on { border-color: var(--forest) !important; background: var(--sage-soft) !important; box-shadow: inset 0 0 0 1px var(--forest); }
+#fhq .fh-opt svg.fh-ill { width: 56px; height: 56px; flex: none; border-radius: 11px; }
+#fhq .fh-opt-t { flex: 1; min-width: 0; display: block; }
+#fhq .fh-opt-t b { display: block; font-size: 16px; font-weight: 600; line-height: 1.4; color: var(--ink); }
+#fhq .fh-opt-t small { display: block; font-size: 13.5px; color: var(--muted); line-height: 1.4; margin-top: 1px; }
+#fhq .fh-tick { width: 22px; height: 22px; flex: none; border: 1.5px solid #B9B4A3; border-radius: 50%; display: grid; place-items: center; }
+#fhq .fh-opts.multi .fh-tick { border-radius: 6px; }
+#fhq .fh-opt.on .fh-tick { background: var(--forest); border-color: var(--forest); }
+#fhq .fh-opt.on .fh-tick::after { content: ''; width: 5px; height: 10px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg) translate(-1px,-1px); }
+#fhq .fh-q .fh-btn { margin-top: 18px; }
+
+/* Reading screen */
+#fhq .fh-read { min-height: 560px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 32px 24px; background: var(--forest-deep); color: #FFFDF8; }
+#fhq .fh-read svg { width: 200px; height: 90px; overflow: visible; }
+#fhq .fh-read svg path { fill: none; stroke: var(--gold); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 100; animation: fh-grow 2s ease-in-out forwards; }
+@keyframes fh-grow { to { stroke-dashoffset: 0; } }
+#fhq .fh-read h2 { font-size: 26px; margin-top: 16px; color: #FFFDF8; }
+#fhq .fh-read-sub { margin-top: 6px; font-size: 14.5px; color: #B9C6B4; }
+#fhq .fh-read ul { list-style: none; display: grid; gap: 13px; width: 100%; max-width: 300px; margin: 26px auto 0; text-align: right; }
+#fhq .fh-read li { display: flex; align-items: center; gap: 11px; font-size: 15.5px; font-weight: 500; color: #D7E0D2; opacity: .35; transition: opacity .3s, color .3s; }
+#fhq .fh-read li i { width: 22px; height: 22px; flex: none; border-radius: 50%; border: 2px solid rgba(255,255,255,.35); display: grid; place-items: center; transition: background .3s, border-color .3s; }
+#fhq .fh-read li.on { opacity: 1; color: #FFFDF8; }
+#fhq .fh-read li.on i { border-color: var(--gold); border-top-color: transparent; animation: fh-spin .8s linear infinite; }
+#fhq .fh-read li.done { opacity: 1; color: #FFFDF8; }
+#fhq .fh-read li.done i { background: var(--gold); border-color: var(--gold); }
+#fhq .fh-read li.done i::after { content: ''; width: 5px; height: 10px; border: solid var(--forest-deep); border-width: 0 2px 2px 0; transform: rotate(45deg) translate(-1px, -1px); }
+@keyframes fh-spin { to { transform: rotate(360deg); } }
+
+/* Result */
+#fhq .fh-r-head { background: var(--forest-deep); color: #FFFDF8; padding: 26px 20px 22px; }
+#fhq .fh-r-head small { font-size: 13.5px; font-weight: 600; color: var(--gold); }
+#fhq .fh-r-head h2 { font-size: clamp(28px, 7.6vw, 34px); line-height: 1.25; margin-top: 2px; color: #FFFDF8; }
+#fhq .fh-map { margin-top: 18px; position: relative; display: grid; gap: 10px; }
+#fhq .fh-map::before { content: ''; position: absolute; top: 12px; bottom: 12px; right: 6px; border-right: 2px dotted rgba(255,255,255,.3); }
+#fhq .fh-map-row { position: relative; display: flex; align-items: center; gap: 12px; }
+#fhq .fh-dot { width: 14px; height: 14px; flex: none; border-radius: 50%; border: 2px solid var(--forest-deep); box-sizing: content-box; margin: -2px; }
+#fhq .l0 .fh-dot { background: #8DB27C; } #fhq .l1 .fh-dot { background: var(--gold); } #fhq .l2 .fh-dot { background: #E2714C; }
+#fhq .fh-map-row b { font-weight: 600; font-size: 15px; flex: 1; color: #FFFDF8; }
+#fhq .fh-map-row span { font-size: 13.5px; color: #D7E0D2; }
+#fhq .l2 span { color: #F4B49D; font-weight: 600; }
+
+#fhq .fh-r-body { padding: 18px 20px 8px; display: grid; gap: 22px; }
+#fhq .fh-prod { background: var(--card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
+#fhq .fh-prod-img { background: #fff; aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; }
+#fhq .fh-prod-img img { width: 100%; height: 100%; object-fit: cover; }
+#fhq .fh-prod-t { padding: 14px 16px 16px; }
+#fhq .fh-prod-t small { font-size: 13px; font-weight: 700; color: var(--moss); }
+#fhq .fh-prod-t h3 { font-size: 25px; line-height: 1.25; color: var(--ink); direction: ltr; text-align: right; }
+#fhq .fh-prod-t .fh-ar { font-size: 15px; color: var(--muted); margin-top: 1px; }
+#fhq .fh-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin-top: 10px; font-size: 25px; font-weight: 700; color: var(--forest); }
+#fhq .fh-price s { font-size: 15px; font-weight: 500; color: var(--muted); }
+#fhq .fh-save { font-size: 13px; font-weight: 700; background: var(--clay-soft); color: var(--clay); padding: 2px 9px; border-radius: 6px; }
+#fhq .fh-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+#fhq .fh-chips span { font-size: 12.5px; padding: 3px 9px; background: var(--sage-soft); border-radius: 6px; color: var(--forest-deep); direction: ltr; }
+#fhq .fh-sec h3 { font-size: 21px; margin-bottom: 8px; color: var(--ink); }
+#fhq .fh-list { list-style: none; display: grid; gap: 8px; }
+#fhq .fh-list li { position: relative; padding-right: 22px; font-size: 15px; line-height: 1.55; }
+#fhq .fh-list li::before { content: ''; position: absolute; right: 2px; top: 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--moss); }
+#fhq .fh-steps { list-style: none; display: grid; gap: 10px; counter-reset: s; }
+#fhq .fh-steps li { counter-increment: s; display: flex; gap: 11px; font-size: 15px; line-height: 1.55; }
+#fhq .fh-steps li::before { content: counter(s); flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--sage); color: var(--forest-deep); display: grid; place-items: center; font-size: 13.5px; font-weight: 700; }
+#fhq .fh-steps b { font-weight: 700; }
+#fhq .fh-alt { display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; text-decoration: none !important; color: var(--ink) !important; }
+#fhq .fh-alt + .fh-alt { margin-top: 8px; }
+#fhq .fh-alt img { width: 62px; height: 62px; flex: none; object-fit: contain; background: #fff; border-radius: 9px; }
+#fhq .fh-alt div { flex: 1; min-width: 0; font-size: 14px; line-height: 1.45; color: var(--muted); }
+#fhq .fh-alt b { display: block; font-size: 15px; font-weight: 700; color: var(--ink); }
+#fhq .fh-alt em { font-style: normal; font-weight: 700; color: var(--forest); white-space: nowrap; font-size: 14.5px; }
+#fhq .fh-doc { font-size: 13.5px; line-height: 1.55; padding: 10px 12px; background: var(--clay-soft); border-radius: 8px; color: #6E2F1D; }
+#fhq .fh-trust { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 13.5px; font-weight: 600; text-align: center; color: var(--forest-deep); }
+#fhq .fh-trust span { padding: 9px 6px; border: 1px solid var(--line); border-radius: 9px; }
+#fhq .fh-again { display: block; margin: 0 auto 6px; padding: 10px 16px; font-size: 14.5px; font-weight: 600; color: var(--muted) !important; text-decoration: underline; text-underline-offset: 3px; }
+#fhq .fh-buy { position: sticky; bottom: 0; z-index: 5; display: flex; justify-content: center; padding: 12px 20px calc(12px + env(safe-area-inset-bottom)); background: var(--card); border-top: 1px solid var(--line); }
+#fhq .fh-buy .fh-btn { width: 100%; max-width: 420px; min-height: 54px; font-size: 16.5px; padding: 10px 16px; animation: fh-pulse 2s ease-out infinite; }
+#fhq .fh-buy .fh-btn b { font-weight: 700; padding-right: 10px; margin-right: 2px; border-right: 1px solid rgba(255,253,248,.35); white-space: nowrap; }
+@keyframes fh-pulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(29, 70, 55, .45); }
+  50% { transform: scale(1.03); box-shadow: 0 0 0 12px rgba(29, 70, 55, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(29, 70, 55, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #fhq *, #fhq *::before, #fhq *::after { animation-duration: .01ms !important; animation-delay: 0s !important; transition-duration: .01ms !important; }
+}
+</style>
+
+<div id="fhq" dir="rtl" lang="ar"><div class="fh-shell" id="fhqShell" aria-live="polite"></div></div>
+
+<script>
+(function () {
+  'use strict';
+
+  // ═══════════════ PRODUCTS — edit links, prices and photos here ═══════════════
+  var CDN = 'https://cdn.shopify.com/s/files/1/0586/6143/7533/files/';
+  var PRODUCTS = {
+    scalpPack: {
+      kicker: 'الباك الأنسب لك', name: 'Pack Scalp+ Repair',
+      ar: 'شامبو ضد القشرة SCALP CONTROL+ مع بلسم مرمم INTENSE REPAIR',
+      price: 2900, short: 'الباك',
+      url: 'https://flore-dz.a.ayor.ai/flore-dz/gamme-scalpcontrol',
+      img: CDN + 'productsite.webp?v=1786395013&width=800',
+      chips: ['Piroctone Olamine', 'Aloe Vera', 'Acide Hyaluronique', 'Céramides', 'Urée', "Huile d'Argan"],
+      does: ['الشامبو يساعد على إزالة القشرة ومنع عودتها ويهدئ التهيج', 'البلسم يقوي الألياف ويسهل التسريح ويرطب دون إثقال', '98% مكونات من أصل طبيعي، ومختبر جلدياً'],
+      how: ['<b>الشامبو:</b> دلّك الفروة على شعر مبلل، اتركه 1 إلى 2 دقيقة، ثم اشطف. من 2 إلى 3 مرات في الأسبوع، ثم مرة أو مرتين للمحافظة.', '<b>البلسم:</b> ضعه على الأطوال والأطراف بعد الشامبو، اتركه 2 إلى 3 دقائق، سرّح الشعر ثم اشطف.']
+    },
+    scalpSolo: {
+      kicker: 'المنتج الأنسب لك', name: 'SCALP CONTROL+',
+      ar: 'شامبو ضد القشرة', price: 1600, short: 'الشامبو',
+      url: 'https://floredz.com/products/shampooing-anti-pelliculaire-flore-ff',
+      img: CDN + 'Flore-Shampoo-1.png?v=1785582820&width=800',
+      chips: ['Piroctone Olamine', 'Aloe Vera', 'Acide Hyaluronique'],
+      does: ['يساعد على إزالة القشرة ومنع عودتها', 'يعيد التوازن للفروة ويهدئ التهيج', 'يحافظ على الترطيب دون إثقال الشعر', '98% مكونات من أصل طبيعي، ومختبر جلدياً'],
+      how: ['ضعه على شعر مبلل ودلّك الفروة بلطف.', 'اتركه 1 إلى 2 دقيقة ثم اشطف جيداً.', 'من 2 إلى 3 مرات في الأسبوع، ثم مرة أو مرتين للمحافظة.']
+    },
+    hairPack: {
+      kicker: 'الباك الأنسب لك', name: 'Perfect Hair',
+      ar: 'باك الشامبو والماسك للشعر الذي يتساقط أو تضرر', price: 4900, short: 'الباك',
+      url: 'https://floredz.com/products/perfect-hair',
+      img: CDN + 'packsm.jpg?v=1735559902&width=800',
+      chips: ['Kératine', 'Huile de figue de barbarie', 'Argan', 'Ail', 'Jojoba', 'Coco', 'Karité', 'Vitamine B5'],
+      does: ['الشامبو ينظف بلطف، يقوي الجذور ويغذي الشعر', 'الماسك يغذي بعمق حتى الأطراف ويصلح الشعر المتضرر', 'معاً يعتنيان بالفروة والجذور والأطوال في روتين واحد'],
+      how: ['<b>الشامبو:</b> كمية صغيرة على شعر مبلل، دلّك الفروة بلطف ثم اشطف بماء دافئ.', '<b>الماسك:</b> ضعه بسخاء على شعر جاف أو رطب من الجذور إلى الأطراف، اتركه من ساعة إلى ساعتين ثم اشطف جيداً.']
+    },
+    shampoo: {
+      kicker: 'المنتج الأنسب لك', name: 'Shampooing Floré',
+      ar: 'شامبو يقوي الجذور وينقي الفروة، لجميع أنواع الشعر', price: 2300, short: 'الشامبو',
+      url: 'https://floredz.com/products/shampooing-flore-h',
+      img: CDN + 'Shampoo_-_fond_blanc_02.jpg?v=1735064156&width=800',
+      chips: ['Kératine', 'Huile de figue de barbarie', 'Argan', 'Ail', 'Ricin'],
+      does: ['ينظف وينقي الفروة بلطف ويقوي الجذور', 'يساعد على تقليل التساقط ويمنح الشعر مظهراً أكثف', 'شعر أنعم وأسهل في التسريح مع لمعان طبيعي', 'الكيراتين يقوي الشعر الضعيف أو المصبوغ', '98% مكونات طبيعية، بدون سلفات قاسية أو بارابين'],
+      how: ['كمية صغيرة على شعر مبلل.', 'دلّك الفروة بلطف لتنشيطها.', 'اشطف جيداً بماء دافئ.']
+    },
+    mask: {
+      kicker: 'المنتج الأنسب لك', name: 'Masque Perfect Hair',
+      ar: 'ماسك يصلح ويحمي الشعر الجاف والمتضرر', price: 3600, short: 'الماسك',
+      url: 'https://floredz.com/products/masque-perfect-hair-gf',
+      img: CDN + 'MasqueGF-whitebackground.jpg?v=1737465188&width=800',
+      chips: ['Jojoba', 'Coco', 'Karité', 'Vitamine B5', 'Oméga 3 & 6'],
+      does: ['يغذي الشعر بعمق حتى الأطراف ويصلح الشعر المتضرر', 'يقلل التكسر والأطراف المتقصفة', 'يعيد النعومة واللمعان والمرونة'],
+      how: ['ضعه بسخاء على شعر جاف أو رطب.', 'دلّكه من الجذور إلى الأطراف.', 'اتركه من ساعة إلى ساعتين ثم اشطف جيداً.']
+    }
+  };
+
+  // ═══════════════ RECOMMENDATION LOGIC ═══════════════
+  // Q1 names her main problem and picks the range:
+  //   dandruff -> Scalp Control line, everything else -> Perfect Hair line.
+  // Then 1–3 follow-ups decide single product or pack. She never picks a product.
+  function recommend(a) {
+    switch (a.main) {
+      case 'dandruff': return a.lengths !== 'smooth' || a.treat === 'yes' ? 'scalpPack' : 'scalpSolo';
+      case 'fall':
+        if (a.fallKind === 'broken') return a.treat === 'yes' ? 'hairPack' : 'mask';
+        return a.thinner === 'yes' || a.ends === 'yes' ? 'hairPack' : 'shampoo';
+      case 'thin': return a.ends === 'yes' || a.alsoFall === 'yes' ? 'hairPack' : 'shampoo';
+      case 'damage': return a.alsoFall === 'yes' || a.treat === 'yes' ? 'hairPack' : 'mask';
+      case 'frizz': return a.alsoFall === 'yes' ? 'hairPack' : 'mask';
+      default: return a.dry === 'yes' ? 'mask' : 'shampoo';
+    }
+  }
+
+  function diagnose(a) {
+    var wholeFall = a.main === 'fall' && a.fallKind === 'whole';
+    var roots = wholeFall || a.main === 'thin' ? 2 : (a.alsoFall === 'yes' ? 1 : 0);
+    var lengths = (a.lengths && a.lengths !== 'smooth') || a.ends === 'yes' || a.fallKind === 'broken' ||
+      a.main === 'damage' || a.main === 'frizz' ? 2 : (a.treat === 'yes' || a.dry === 'yes' ? 1 : 0);
+    return { levels: { scalp: a.main === 'dandruff' ? 2 : 0, roots: roots, lengths: lengths } };
+  }
+
+  // ═══════════════ QUESTIONS ═══════════════
+  var YESNO = function () { return [{ v: 'yes', t: 'نعم' }, { v: 'no', t: 'لا' }]; };
+  var QUESTIONS = [
+    { id: 'who', text: function () { return 'هل أنتِ امرأة أم رجل؟'; }, hint: function () { return 'لنخاطبك بالطريقة المناسبة.'; },
+      opts: function () { return [{ v: 'f', t: 'امرأة' }, { v: 'm', t: 'رجل' }]; } },
+    { id: 'main', text: function (g) { return g('ما المشكلة الأساسية في شعركِ؟', 'ما المشكلة الأساسية في شعرك؟'); }, hint: function (g) { return g('اختاري المشكلة التي تزعجكِ أكثر.', 'اختر المشكلة التي تزعجك أكثر.'); },
+      opts: function () { return [
+        { v: 'dandruff', t: 'قشرة أو حكة في فروة الرأس' },
+        { v: 'fall', t: 'تساقط الشعر' },
+        { v: 'thin', t: 'شعر خفيف وضعيف' },
+        { v: 'damage', t: 'جفاف وأطراف متقصفة' },
+        { v: 'frizz', t: 'هيشان وصعوبة في التسريح' },
+        { v: 'dull', t: 'شعر باهت بلا لمعان' }]; } },
+
+    { id: 'lengths', when: function (a) { return a.main === 'dandruff'; },
+      text: function (g) { return g('بعد غسل شعركِ، كيف تكون أطوالكِ؟', 'بعد غسل شعرك، كيف تكون أطوالك؟'); }, hint: function () { return 'القشرة في الفروة، لكن الأطوال قد تحتاج عناية أيضاً.'; },
+      opts: function () { return [{ v: 'smooth', t: 'ناعمة وسهلة التسريح' }, { v: 'dry', t: 'جافة وتتشابك عند التسريح' }, { v: 'rough', t: 'خشنة وأطرافها متقصفة' }]; } },
+
+    { id: 'fallKind', when: function (a) { return a.main === 'fall'; },
+      text: function (g) { return g('عندما يتساقط شعركِ، ماذا تجدين في المشط أو الحمام؟', 'عندما يتساقط شعرك، ماذا تجد في المشط أو الحمام؟'); },
+      opts: function () { return [{ v: 'whole', t: 'شعرات طويلة كاملة', s: 'تسقط من الجذر' }, { v: 'broken', t: 'قطع قصيرة مكسورة', s: 'الشعر ينكسر في منتصفه' }]; } },
+    { id: 'thinner', when: function (a) { return a.main === 'fall' && a.fallKind === 'whole'; },
+      text: function (g) { return g('هل أصبح شعركِ أخف من قبل؟', 'هل أصبح شعرك أخف من قبل؟'); }, hint: function (g) { return g('مثلاً: ذيل الحصان أرفع، أو بدأت فروة الرأس تظهر.', 'مثلاً: بدأت فروة الرأس تظهر، أو تراجع خط الشعر من الأمام.'); }, opts: YESNO },
+    { id: 'ends', when: function (a) { return (a.main === 'fall' && a.fallKind === 'whole') || a.main === 'thin'; },
+      text: function (g) { return g('هل أطراف شعركِ جافة أو متقصفة؟', 'هل أطراف شعرك جافة أو متقصفة؟'); }, opts: YESNO },
+    { id: 'alsoFall', when: function (a) { return (a.main === 'thin' && a.ends === 'no') || a.main === 'damage' || a.main === 'frizz'; },
+      text: function (g) { return g('هل يتساقط شعركِ أكثر من المعتاد أيضاً؟', 'هل يتساقط شعرك أكثر من المعتاد أيضاً؟'); }, opts: YESNO },
+    { id: 'treat', when: function (a) { return (a.main === 'dandruff' && a.lengths === 'smooth') || (a.main === 'damage' && a.alsoFall === 'no') || a.fallKind === 'broken'; },
+      text: function (g) { return g('هل تصبغين شعركِ أو تفردينه أو تستعملين عليه المكواة؟', 'هل تصبغ شعرك أو تفرده أو تستعمل عليه السشوار أو المكواة؟'); }, hint: function () { return 'هذه العوامل تُجهد الشعر حتى لو بدا بخير الآن.'; }, opts: YESNO },
+    { id: 'dry', when: function (a) { return a.main === 'dull'; },
+      text: function (g) { return g('هل شعركِ جاف عند اللمس أيضاً؟', 'هل شعرك جاف عند اللمس أيضاً؟'); }, opts: YESNO }
+  ];
+
+// ═══════════════ STATE + RENDER ═══════════════
+  var shell = document.getElementById('fhqShell');
+  var root = document.getElementById('fhq');
+  var a = {}, hist = [], result = null, peak = 0, timer = null;
+  var g = function (f, m) { return a.who === 'm' ? m : f; };
+  var dz = function (n) { return n.toLocaleString('en-US') + ' د.ج'; };
+  var ARROW = '<svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M11 19l-7-7 7-7M4 12h16"/></svg>';
+
+  function track(name, data) {
+    try { if (window.fbq) window.fbq('trackCustom', name, data || {}); } catch (e) {}
+    try { (window.dataLayer = window.dataLayer || []).push(Object.assign({ event: name }, data || {})); } catch (e) {}
+  }
+  function view() {
+    var top = root.getBoundingClientRect().top;
+    if (top < 0) root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  function nextIndex(from) {
+    for (var i = from; i < QUESTIONS.length; i++) if (!QUESTIONS[i].when || QUESTIONS[i].when(a)) return i;
+    return -1;
+  }
+  function remaining(from) {
+    var n = 0; for (var i = from; i < QUESTIONS.length; i++) if (!QUESTIONS[i].when || QUESTIONS[i].when(a)) n++;
+    return n;
+  }
+
+  function renderLanding() {
+    a = {}; hist = []; peak = 0; result = null;
+    shell.innerHTML =
+      '<section class="fh-land fh-screen">' +
+      '<div class="fh-badge">خطوة نحو شعر أجمل • أقل من دقيقة</div>' +
+      '<div class="fh-logo">Floré</div>' +
+      '<h1>روتين شعركِ المثالي <span>يبدأ من هنا</span></h1>' +
+      '<p class="fh-lead">أجيبي على أسئلة قصيرة وسنكشف لكِ المنتج الأنسب لشعركِ، سواء كانت مشكلتكِ التساقط أو ضعف الشعر أو الجفاف أو القشرة.</p>' +
+      '<div class="fh-trustbar"><div><b>98%</b><span>مكونات<br>طبيعية</span></div><div><b>58</b><span>ولاية<br>يصلها التوصيل</span></div><div><b>الدفع</b><span>عند<br>الاستلام</span></div></div>' +
+      '<button type="button" class="fh-btn" data-go="start"><span>اكتشفي روتينكِ الآن</span>' + ARROW + '</button>' +
+      '<div class="fh-meta">مجاني 100% • أقل من دقيقة</div></section>';
+  }
+
+function renderQuestion(i) {
+    var q = QUESTIONS[i];
+    var total = hist.length + remaining(i);
+    peak = Math.max(peak, Math.round(hist.length / total * 90) + 6);
+    var opts = q.opts(a), sel = a[q.id];
+    var note = q.note ? q.note(a) : '';
+    shell.innerHTML =
+      '<section class="fh-q fh-screen">' +
+      '<div class="fh-top"><button type="button" class="fh-back" data-go="back" aria-label="السابق"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 5l7 7-7 7M20 12H4"/></svg></button>' +
+      '<svg class="fh-strand" viewBox="0 0 300 34" preserveAspectRatio="none" role="progressbar" aria-valuenow="' + peak + '" aria-valuemin="0" aria-valuemax="100" aria-label="التقدم"><path class="bg" vector-effect="non-scaling-stroke" d="M292 17C250 2 225 32 180 17S110 2 70 17 25 30 4 16"/><path class="fg" pathLength="100" vector-effect="non-scaling-stroke" style="stroke-dashoffset:' + (100 - peak) + '" d="M292 17C250 2 225 32 180 17S110 2 70 17 25 30 4 16"/><circle class="bulb" cx="292" cy="17" r="5"/></svg></div>' +
+      '<div class="fh-zone">' + 'السؤال ' + (hist.length + 1) + '</div>' +
+      '<h2 tabindex="-1" id="fhTitle">' + q.text(g) + '</h2>' +
+      (q.hint ? '<p class="fh-hint">' + q.hint(g) + '</p>' : '') +
+      (note ? '<p class="fh-note">' + note + '</p>' : '') +
+      '<div class="fh-opts' + (q.multi ? ' multi' : '') + '">' + opts.map(function (o) {
+        var on = q.multi ? (sel || []).indexOf(o.v) > -1 : sel === o.v;
+        return '<button type="button" class="fh-opt' + (on ? ' on' : '') + '" data-v="' + o.v + '" aria-pressed="' + on + '">' + (o.ill || '') +
+          '<span class="fh-opt-t"><b>' + o.t + '</b>' + (o.s ? '<small>' + o.s + '</small>' : '') + '</span><span class="fh-tick"></span></button>';
+      }).join('') + '</div>' +
+      (q.multi ? '<button type="button" class="fh-btn" data-go="next"' + ((sel || []).length ? '' : ' disabled') + '><span>متابعة</span>' + ARROW + '</button>' : '') +
+      '</section>';
+    shell.dataset.q = i;
+    var title = document.getElementById('fhTitle');
+    if (title && hist.length) title.focus({ preventScroll: true });
+    view();
+  }
+
+  function advance() {
+    var i = +shell.dataset.q;
+    hist.push(i);
+    var n = nextIndex(i + 1);
+    if (n === -1) renderReading(); else renderQuestion(n);
+  }
+
+  function pick(btn) {
+    var q = QUESTIONS[+shell.dataset.q], v = btn.dataset.v;
+    if (q.multi) {
+      var cur = a[q.id] || [];
+      if (v === 'none') cur = cur.indexOf('none') > -1 ? [] : ['none'];
+      else {
+        cur = cur.filter(function (x) { return x !== 'none'; });
+        cur = cur.indexOf(v) > -1 ? cur.filter(function (x) { return x !== v; }) : cur.concat(v);
+      }
+      a[q.id] = cur;
+      shell.querySelectorAll('.fh-opt').forEach(function (b) {
+        var on = cur.indexOf(b.dataset.v) > -1;
+        b.classList.toggle('on', on); b.setAttribute('aria-pressed', on);
+      });
+      shell.querySelector('[data-go="next"]').disabled = !cur.length;
+      return;
+    }
+    a[q.id] = v;
+    shell.querySelectorAll('.fh-opt').forEach(function (b) {
+      var on = b === btn; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on);
+    });
+    clearTimeout(timer);
+    timer = setTimeout(advance, 240);
+  }
+
+  function renderReading() {
+    // Forget answers to questions that were skipped after a change of mind
+    var kept = {}; hist.forEach(function (i) { var id = QUESTIONS[i].id; kept[id] = a[id]; }); a = kept;
+    result = recommend(a);
+    track('HairQuizComplete', { result: result });
+    var steps = ['نحلل حالة فروة الرأس', 'نفحص قوة الجذور وسبب التساقط', 'نقيّم حالة الأطوال والأطراف', 'نختار التركيبة الأنسب لشعرك'];
+    shell.innerHTML = '<section class="fh-read fh-screen"><svg viewBox="0 0 300 90" aria-hidden="true"><path pathLength="100" d="M292 45C250 10 225 80 180 45S110 10 70 45 25 75 8 42"/></svg>' +
+      '<h2>' + g('نحلل إجاباتكِ...', 'نحلل إجاباتك...') + '</h2><p class="fh-read-sub">نطابق حالة شعرك مع مكونات منتجات Floré</p>' +
+      '<ul>' + steps.map(function (x) { return '<li><i></i><span>' + x + '</span></li>'; }).join('') + '</ul></section>';
+    view();
+    var items = shell.querySelectorAll('.fh-read li'), s = 0;
+    items[0].className = 'on';
+    var tick = setInterval(function () {
+      items[s].className = 'done'; s++;
+      if (s < items.length) items[s].className = 'on'; else clearInterval(tick);
+    }, 750);
+    timer = setTimeout(function () { clearInterval(tick); renderResult(); }, 3400);
+  }
+
+  function reasons(k, d) {
+    // Each reason ties one of her answers to an ingredient in the recommended product
+    var r = [];
+    if (a.main === 'dandruff') r.push('<b>القشرة أو الحكة:</b> بيروكتون أولامين يساعد على إزالة القشرة ومنع عودتها، والألوفيرا يهدئ الفروة.');
+    if (a.lengths === 'dry') r.push('<b>أطرافكِ جافة وتتشابك:</b> بلسم INTENSE REPAIR يرطبها ويسهل التسريح.');
+    if (a.lengths === 'rough') r.push('<b>أطرافكِ خشنة ومتقصفة:</b> السيراميدات في البلسم تقوي الشعر وتقلل التكسر.');
+    if (k === 'scalpPack' && a.treat === 'yes') r.push('<b>الصبغة أو الفرد أو المكواة:</b> البلسم يحمي الأطوال ويقويها.');
+    if (k === 'scalpSolo') r.push('<b>أطوالكِ ناعمة:</b> الشامبو وحده يكفي.');
+
+    if (a.fallKind === 'whole') r.push('<b>شعرات كاملة تسقط من الجذر:</b> مستخلص الثوم في الشامبو يقوي الجذور ويساعد على تقليل التساقط.');
+    if (a.fallKind === 'broken') r.push('<b>قطع مكسورة:</b> هذا تكسر وليس تساقطاً من الجذر، والماسك يقوي الشعر ويقلل التكسر.');
+    if (a.thinner === 'yes') r.push('<b>شعركِ أصبح أخف:</b> الكيراتين في الشامبو يقوي الشعر، والماسك يغذيه حتى الأطراف.');
+    if (a.main === 'thin') r.push('<b>شعر خفيف وضعيف:</b> الكيراتين يقوي الشعر ويمنحه مظهراً أكثف.');
+    if (a.ends === 'yes') r.push('<b>أطراف جافة أو متقصفة:</b> الماسك يغذيها بعمق ويقلل التقصف.');
+    if (k === 'shampoo' && a.main !== 'dull') r.push('<b>أطرافكِ بخير:</b> الشامبو وحده يكفي الآن.');
+
+    if (a.main === 'damage') r.push('<b>جفاف وتقصف:</b> زبدة الشيا وفيتامين B5 يغذيان الشعر ويقللان التقصف.');
+    if (a.main === 'frizz') r.push('<b>الهيشان:</b> زيت جوز الهند يقلله، وزبدة الشيا تنعم الشعر.');
+    if (a.alsoFall === 'yes') r.push('<b>التساقط أيضاً:</b> مستخلص الثوم في الشامبو يقوي الجذور.');
+    if (k === 'hairPack' && a.treat === 'yes') r.push('<b>الصبغة أو الفرد أو المكواة:</b> الكيراتين في الشامبو مثالي للشعر بعد المواد الكيميائية.');
+
+    if (a.main === 'dull') r.push('<b>شعر باهت:</b> زيت التين الشوكي والأركان يعيدان اللمعان.');
+    if (a.dry === 'yes') r.push('<b>وجاف أيضاً:</b> الماسك يغذيه بعمق ويعيد له النعومة واللمعان.');
+    return a.who === 'm' ? r.map(function (x) { return x.replace(/كِ/g, 'ك'); }) : r;
+  }
+
+var TITLES = {
+    scalpPack: 'الفروة أولاً، ثم الأطوال', scalpSolo: 'أصل الموضوع في فروتك',
+    hairPack: 'الجذور والأطوال تحتاجان عناية معاً', shampoo: 'الشامبو الأنسب لشعرك', mask: 'أطوالك هي الأولوية'
+  };
+  var LEVEL = ['بخير', 'تحتاج انتباهاً', 'أولوية'];
+
+  function altCard(key, line) {
+    var p = PRODUCTS[key];
+    return '<a class="fh-alt" href="' + link(p, key) + '" data-alt="' + key + '"><img src="' + p.img + '" alt="" loading="lazy" onerror="this.style.visibility=\'hidden\'"><div><b>' + p.name + '</b>' + line + '</div><em>' + dz(p.price) + '</em></a>';
+  }
+  function link(p, key) {
+    return p.url + (p.url.indexOf('?') > -1 ? '&' : '?') + 'utm_source=hair_quiz&utm_medium=quiz&utm_content=' + key;
+  }
+
+  function renderResult() {
+    var k = result, p = PRODUCTS[k], d = diagnose(a), lv = d.levels;
+    var why = reasons(k, d);
+    var alts = '', altTitle = '';
+    if (k === 'scalpPack') { altTitle = 'تفضّل البدء بالشامبو فقط؟'; alts = altCard('scalpSolo', 'شامبو القشرة وحده'); }
+    if (k === 'scalpSolo') { altTitle = 'لنتيجة أشمل'; alts = altCard('scalpPack', 'أضف بلسم INTENSE REPAIR للأطوال'); }
+    if (k === 'hairPack') { altTitle = 'تفضّل منتجاً واحداً؟'; alts = altCard('shampoo', 'الشامبو وحده') + altCard('mask', 'الماسك وحده'); }
+    if (k === 'shampoo' || k === 'mask') { altTitle = 'لنتيجة أشمل'; alts = altCard('hairPack', 'الشامبو والماسك معاً'); }
+    var doc = a.thinner === 'yes'
+      ? '<p class="fh-doc">إذا كان التساقط مفاجئاً أو على شكل بقع، أو كانت الفروة ملتهبة أو مؤلمة، فالأفضل استشارة طبيب جلد.</p>' : '';
+
+    shell.innerHTML =
+      '<section class="fh-screen">' +
+      '<div class="fh-r-head"><small>خريطة شعرك</small><h2 tabindex="-1" id="fhTitle">' + TITLES[k] + '</h2><div class="fh-map">' +
+      [['الفروة', lv.scalp], ['الجذور', lv.roots], ['الأطوال', lv.lengths]].map(function (z) {
+        return '<div class="fh-map-row l' + z[1] + '"><i class="fh-dot"></i><b>' + z[0] + '</b><span>' + LEVEL[z[1]] + '</span></div>';
+      }).join('') + '</div></div>' +
+      '<div class="fh-r-body">' +
+      '<article class="fh-prod"><div class="fh-prod-img"><img src="' + p.img + '" alt="' + p.name + '" onerror="this.style.visibility=\'hidden\'"></div><div class="fh-prod-t"><small>' + p.kicker + '</small><h3>' + p.name + '</h3><p class="fh-ar">' + p.ar + '</p>' +
+      '<div class="fh-price"><span>' + dz(p.price) + '</span></div>' +
+      '<div class="fh-chips">' + p.chips.map(function (c) { return '<span>' + c + '</span>'; }).join('') + '</div></div></article>' +
+      (why.length ? '<div class="fh-sec"><h3>لماذا هذا الاختيار؟</h3><ul class="fh-list">' + why.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul></div>' : '') +
+      '<div class="fh-sec"><h3>ماذا سيفعل لشعرك؟</h3><ul class="fh-list">' + p.does.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul></div>' +
+      '<div class="fh-sec"><h3>طريقة الاستعمال</h3><ol class="fh-steps">' + p.how.map(function (x) { return '<li><span>' + x + '</span></li>'; }).join('') + '</ol></div>' +
+      (alts ? '<div class="fh-sec"><h3>' + altTitle + '</h3>' + alts + '</div>' : '') +
+      doc +
+      '<div class="fh-trust"><span>الدفع عند الاستلام</span><span>التوصيل لكل الولايات</span></div>' +
+      '<button type="button" class="fh-again" data-go="restart">إعادة التشخيص</button>' +
+      '</div>' +
+      '<div class="fh-buy"><a class="fh-btn" id="fhBuy" href="' + link(p, k) + '" data-alt="' + k + '"><span>' + g('اطلبي', 'اطلب') + ' ' + p.short + ' الآن</span><b>' + dz(p.price) + '</b>' + ARROW + '</a></div>' +
+      '</section>';
+    delete shell.dataset.q;
+    track('HairQuizResult', { result: k });
+    view();
+  }
+
+  shell.addEventListener('click', function (e) {
+    var opt = e.target.closest('.fh-opt');
+    if (opt) { pick(opt); return; }
+    var buy = e.target.closest('[data-alt]');
+    if (buy) { track('HairQuizProductClick', { result: result, product: buy.dataset.alt }); return; }
+    var go = e.target.closest('[data-go]');
+    if (!go || go.disabled) return;
+    clearTimeout(timer);
+    var act = go.dataset.go;
+    if (act === 'start') { track('HairQuizStart'); hist = []; renderQuestion(0); }
+    if (act === 'next') advance();
+    if (act === 'back') {
+      peak = 0;
+      if (hist.length) renderQuestion(hist.pop()); else renderLanding();
+    }
+    if (act === 'restart') { renderLanding(); view(); }
+  });
+
+  renderLanding();
+  window.FloreHairQuiz = { recommend: recommend, diagnose: diagnose, QUESTIONS: QUESTIONS, PRODUCTS: PRODUCTS };
+})();
+</script>
+
+</body>
+</html>
