@@ -84,6 +84,9 @@
 #fhq .fh-opt.on { border-color: var(--forest) !important; background: var(--sage-soft) !important; box-shadow: inset 0 0 0 1px var(--forest); }
 #fhq .fh-opt svg.fh-ill { width: 56px; height: 56px; flex: none; border-radius: 11px; }
 #fhq .fh-opt-t { flex: 1; min-width: 0; display: block; }
+#fhq .fh-opts.multi .fh-opt.solo .fh-tick { border-radius: 50%; }
+#fhq .fh-sep { display: flex; align-items: center; gap: 10px; margin: 6px 2px 0; font-size: 13.5px; font-weight: 600; color: var(--muted); }
+#fhq .fh-sep::before, #fhq .fh-sep::after { content: ''; flex: 1; height: 1px; background: var(--line); }
 #fhq .fh-opt-t b { display: block; font-size: 16px; font-weight: 600; line-height: 1.4; color: var(--ink); }
 #fhq .fh-opt-t small { display: block; font-size: 13.5px; color: var(--muted); line-height: 1.4; margin-top: 1px; }
 #fhq .fh-tick { width: 22px; height: 22px; flex: none; border: 1.5px solid #B9B4A3; border-radius: 50%; display: grid; place-items: center; }
@@ -229,28 +232,33 @@
   };
 
   // ═══════════════ RECOMMENDATION LOGIC ═══════════════
-  // Q1 names her main problem and picks the range:
-  //   dandruff -> Scalp Control line, everything else -> Perfect Hair line.
-  // Then 1–3 follow-ups decide single product or pack. She never picks a product.
+  // Q1 (multi-choice) says which zones have a problem:
+  //   scalp (dandruff) -> Scalp Control line, it is the only one that treats it;
+  //   roots (fall) -> Perfect Hair shampoo; lengths (damage) -> Perfect Hair mask;
+  //   roots + lengths -> Perfect Hair pack.
+  // One decisive follow-up then settles single product or pack. She never picks a product.
+  var has = function (a, v) { return (a.main || []).indexOf(v) > -1; };
+
+  function zones(a) {
+    var S = has(a, 'dandruff');
+    var R = has(a, 'fall') && a.fallKind !== 'broken';     // short broken pieces are breakage, not fall
+    var L = has(a, 'damage') || a.fallKind === 'broken';
+    return { S: S, R: R, L: L, D: has(a, 'dull') };
+  }
+
   function recommend(a) {
-    switch (a.main) {
-      case 'dandruff': return a.lengths !== 'smooth' || a.treat === 'yes' ? 'scalpPack' : 'scalpSolo';
-      case 'fall':
-        if (a.fallKind === 'broken') return a.treat === 'yes' ? 'hairPack' : 'mask';
-        return a.thinner === 'yes' || a.ends === 'yes' ? 'hairPack' : 'shampoo';
-      case 'thin': return a.ends === 'yes' || a.alsoFall === 'yes' ? 'hairPack' : 'shampoo';
-      case 'damage': return a.alsoFall === 'yes' || a.treat === 'yes' ? 'hairPack' : 'mask';
-      case 'frizz': return a.alsoFall === 'yes' ? 'hairPack' : 'mask';
-      default: return a.dry === 'yes' ? 'mask' : 'shampoo';
-    }
+    var z = zones(a);
+    if (z.S) return z.L || (a.lengths && a.lengths !== 'smooth') ? 'scalpPack' : 'scalpSolo';
+    if (z.R && z.L) return 'hairPack';
+    if (z.R) return a.thinner === 'yes' ? 'hairPack' : 'shampoo';
+    if (z.L) return a.treat === 'yes' ? 'hairPack' : 'mask';
+    return a.dry === 'yes' ? 'mask' : 'shampoo';
   }
 
   function diagnose(a) {
-    var wholeFall = a.main === 'fall' && a.fallKind === 'whole';
-    var roots = wholeFall || a.main === 'thin' ? 2 : (a.alsoFall === 'yes' ? 1 : 0);
-    var lengths = (a.lengths && a.lengths !== 'smooth') || a.ends === 'yes' || a.fallKind === 'broken' ||
-      a.main === 'damage' || a.main === 'frizz' ? 2 : (a.treat === 'yes' || a.dry === 'yes' ? 1 : 0);
-    return { levels: { scalp: a.main === 'dandruff' ? 2 : 0, roots: roots, lengths: lengths } };
+    var z = zones(a);
+    var lengths = z.L || (a.lengths && a.lengths !== 'smooth') ? 2 : (a.dry === 'yes' || a.treat === 'yes' ? 1 : 0);
+    return { z: z, levels: { scalp: z.S ? 2 : 0, roots: z.R ? 2 : 0, lengths: lengths } };
   }
 
   // ═══════════════ QUESTIONS ═══════════════
@@ -258,32 +266,32 @@
   var QUESTIONS = [
     { id: 'who', text: function () { return 'هل أنتِ امرأة أم رجل؟'; }, hint: function () { return 'لنخاطبك بالطريقة المناسبة.'; },
       opts: function () { return [{ v: 'f', t: 'امرأة' }, { v: 'm', t: 'رجل' }]; } },
-    { id: 'main', text: function (g) { return g('ما المشكلة الأساسية في شعركِ؟', 'ما المشكلة الأساسية في شعرك؟'); }, hint: function (g) { return g('اختاري المشكلة التي تزعجكِ أكثر.', 'اختر المشكلة التي تزعجك أكثر.'); },
-      opts: function () { return [
-        { v: 'dandruff', t: 'قشرة أو حكة في فروة الرأس' },
-        { v: 'fall', t: 'تساقط الشعر' },
-        { v: 'thin', t: 'شعر خفيف وضعيف' },
-        { v: 'damage', t: 'جفاف وأطراف متقصفة' },
-        { v: 'frizz', t: 'هيشان وصعوبة في التسريح' },
-        { v: 'dull', t: 'شعر باهت بلا لمعان' }]; } },
+    { id: 'main', multi: true, text: function (g) { return g('ماذا تلاحظين في شعركِ؟', 'ماذا تلاحظ في شعرك؟'); }, hint: function (g) { return g('إذا كانت عندكِ قشرة، اختاريها وحدها. وإلا اختاري كل ما ينطبق عليكِ.', 'إذا كانت عندك قشرة، اخترها وحدها. وإلا اختر كل ما ينطبق عليك.'); },
+      opts: function (a, g) { return [
+        { v: 'dandruff', t: 'قشرة أو حكة', s: 'في فروة الرأس، نعالجها أولاً وحدها', solo: true },
+        { v: 'fall', t: 'تساقط أو خفة في الشعر', s: 'يسقط أكثر من قبل أو أصبح أقل كثافة', sep: g ? g('أو اختاري واحدة أو أكثر:', 'أو اختر واحدة أو أكثر:') : '' },
+        { v: 'damage', t: 'جفاف أو تقصف أو هيشان', s: 'في الأطوال والأطراف' },
+        { v: 'dull', t: 'شعر باهت', s: 'بلا لمعان ولا حيوية' }]; } },
 
-    { id: 'lengths', when: function (a) { return a.main === 'dandruff'; },
+    // Scalp line: does the conditioner in the pack have work to do on the lengths?
+    { id: 'lengths', when: function (a) { var z = zones(a); return z.S && !z.L; },
       text: function (g) { return g('بعد غسل شعركِ، كيف تكون أطوالكِ؟', 'بعد غسل شعرك، كيف تكون أطوالك؟'); }, hint: function () { return 'القشرة في الفروة، لكن الأطوال قد تحتاج عناية أيضاً.'; },
       opts: function () { return [{ v: 'smooth', t: 'ناعمة وسهلة التسريح' }, { v: 'dry', t: 'جافة وتتشابك عند التسريح' }, { v: 'rough', t: 'خشنة وأطرافها متقصفة' }]; } },
 
-    { id: 'fallKind', when: function (a) { return a.main === 'fall'; },
-      text: function (g) { return g('عندما يتساقط شعركِ، ماذا تجدين في المشط أو الحمام؟', 'عندما يتساقط شعرك، ماذا تجد في المشط أو الحمام؟'); },
-      opts: function () { return [{ v: 'whole', t: 'شعرات طويلة كاملة', s: 'تسقط من الجذر' }, { v: 'broken', t: 'قطع قصيرة مكسورة', s: 'الشعر ينكسر في منتصفه' }]; } },
-    { id: 'thinner', when: function (a) { return a.main === 'fall' && a.fallKind === 'whole'; },
-      text: function (g) { return g('هل أصبح شعركِ أخف من قبل؟', 'هل أصبح شعرك أخف من قبل؟'); }, hint: function (g) { return g('مثلاً: ذيل الحصان أرفع، أو بدأت فروة الرأس تظهر.', 'مثلاً: بدأت فروة الرأس تظهر، أو تراجع خط الشعر من الأمام.'); }, opts: YESNO },
-    { id: 'ends', when: function (a) { return (a.main === 'fall' && a.fallKind === 'whole') || a.main === 'thin'; },
-      text: function (g) { return g('هل أطراف شعركِ جافة أو متقصفة؟', 'هل أطراف شعرك جافة أو متقصفة؟'); }, opts: YESNO },
-    { id: 'alsoFall', when: function (a) { return (a.main === 'thin' && a.ends === 'no') || a.main === 'damage' || a.main === 'frizz'; },
-      text: function (g) { return g('هل يتساقط شعركِ أكثر من المعتاد أيضاً؟', 'هل يتساقط شعرك أكثر من المعتاد أيضاً؟'); }, opts: YESNO },
-    { id: 'treat', when: function (a) { return (a.main === 'dandruff' && a.lengths === 'smooth') || (a.main === 'damage' && a.alsoFall === 'no') || a.fallKind === 'broken'; },
-      text: function (g) { return g('هل تصبغين شعركِ أو تفردينه أو تستعملين عليه المكواة؟', 'هل تصبغ شعرك أو تفرده أو تستعمل عليه السشوار أو المكواة؟'); }, hint: function () { return 'هذه العوامل تُجهد الشعر حتى لو بدا بخير الآن.'; }, opts: YESNO },
-    { id: 'dry', when: function (a) { return a.main === 'dull'; },
-      text: function (g) { return g('هل شعركِ جاف عند اللمس أيضاً؟', 'هل شعرك جاف عند اللمس أيضاً؟'); }, opts: YESNO }
+    // Perfect Hair line: is it real fall from the root (shampoo) or breakage (mask)?
+    { id: 'fallKind', when: function (a) { return !zones(a).S && has(a, 'fall'); },
+      text: function (g) { return g('الشعر الذي يسقط منكِ، هل هو طويل أم قطع قصيرة؟', 'الشعر الذي يسقط منك، هل هو طويل أم قطع قصيرة؟'); },
+      hint: function (g) { return g('انظري إلى الشعر في المشط أو في الحمام.', 'انظر إلى الشعر في المشط أو في الحمام.'); },
+      opts: function () { return [{ v: 'whole', t: 'شعرات طويلة', s: 'تسقط كاملة من الجذر' }, { v: 'broken', t: 'قطع قصيرة مكسورة', s: 'تنكسر في منتصفها' }]; } },
+    { id: 'thinner', when: function (a) { var z = zones(a); return !z.S && z.R && !z.L; },
+      text: function (g) { return g('هل أصبح شعركِ أخف من قبل؟', 'هل أصبح شعرك أخف من قبل؟'); }, hint: function (g) { return g('مثلاً: ذيل الحصان أرفع، أو بدأت فروة الرأس تظهر.', 'مثلاً: بدأت فروة الرأس تظهر، أو تراجع خط الشعر من الأمام.'); },
+      opts: function () { return [{ v: 'yes', t: 'نعم، أصبح أخف بوضوح' }, { v: 'no', t: 'لا، الكثافة كما هي' }]; } },
+    { id: 'treat', when: function (a) { var z = zones(a); return !z.S && z.L && !z.R; },
+      text: function (g) { return g('هل تصبغين شعركِ أو تفردينه أو تستعملين عليه المكواة؟', 'هل تصبغ شعرك أو تفرده أو تستعمل عليه السشوار أو المكواة؟'); }, hint: function () { return 'هذه العوامل تُضعف الشعر من الداخل، لا الأطراف فقط.'; },
+      opts: function () { return [{ v: 'yes', t: 'نعم، بانتظام' }, { v: 'no', t: 'لا أو نادراً' }]; } },
+    { id: 'dry', when: function (a) { var z = zones(a); return !z.S && !has(a, 'fall') && !z.L; },
+      text: function (g) { return g('هل شعركِ جاف عند اللمس أيضاً؟', 'هل شعرك جاف عند اللمس أيضاً؟'); },
+      opts: function () { return [{ v: 'yes', t: 'نعم، جاف وخشن' }, { v: 'no', t: 'لا، ناعم لكنه باهت' }]; } }
   ];
 
 // ═══════════════ STATE + RENDER ═══════════════
@@ -328,7 +336,7 @@ function renderQuestion(i) {
     var q = QUESTIONS[i];
     var total = hist.length + remaining(i);
     peak = Math.max(peak, Math.round(hist.length / total * 90) + 6);
-    var opts = q.opts(a), sel = a[q.id];
+    var opts = q.opts(a, g), sel = a[q.id];
     var note = q.note ? q.note(a) : '';
     shell.innerHTML =
       '<section class="fh-q fh-screen">' +
@@ -340,7 +348,8 @@ function renderQuestion(i) {
       (note ? '<p class="fh-note">' + note + '</p>' : '') +
       '<div class="fh-opts' + (q.multi ? ' multi' : '') + '">' + opts.map(function (o) {
         var on = q.multi ? (sel || []).indexOf(o.v) > -1 : sel === o.v;
-        return '<button type="button" class="fh-opt' + (on ? ' on' : '') + '" data-v="' + o.v + '" aria-pressed="' + on + '">' + (o.ill || '') +
+        return (o.sep ? '<p class="fh-sep">' + o.sep + '</p>' : '') +
+          '<button type="button" class="fh-opt' + (on ? ' on' : '') + (o.solo ? ' solo' : '') + '" data-v="' + o.v + '" aria-pressed="' + on + '">' + (o.ill || '') +
           '<span class="fh-opt-t"><b>' + o.t + '</b>' + (o.s ? '<small>' + o.s + '</small>' : '') + '</span><span class="fh-tick"></span></button>';
       }).join('') + '</div>' +
       (q.multi ? '<button type="button" class="fh-btn" data-go="next"' + ((sel || []).length ? '' : ' disabled') + '><span>متابعة</span>' + ARROW + '</button>' : '') +
@@ -361,10 +370,13 @@ function renderQuestion(i) {
   function pick(btn) {
     var q = QUESTIONS[+shell.dataset.q], v = btn.dataset.v;
     if (q.multi) {
+      // A "solo" option (dandruff) can't be combined: picking it clears the rest and moves on,
+      // picking any other option clears it.
+      var solo = q.opts(a).filter(function (o) { return o.solo; }).map(function (o) { return o.v; });
       var cur = a[q.id] || [];
-      if (v === 'none') cur = cur.indexOf('none') > -1 ? [] : ['none'];
+      if (solo.indexOf(v) > -1) cur = [v];
       else {
-        cur = cur.filter(function (x) { return x !== 'none'; });
+        cur = cur.filter(function (x) { return solo.indexOf(x) === -1; });
         cur = cur.indexOf(v) > -1 ? cur.filter(function (x) { return x !== v; }) : cur.concat(v);
       }
       a[q.id] = cur;
@@ -373,6 +385,8 @@ function renderQuestion(i) {
         b.classList.toggle('on', on); b.setAttribute('aria-pressed', on);
       });
       shell.querySelector('[data-go="next"]').disabled = !cur.length;
+      clearTimeout(timer);
+      if (solo.indexOf(v) > -1) timer = setTimeout(advance, 240);
       return;
     }
     a[q.id] = v;
@@ -404,26 +418,22 @@ function renderQuestion(i) {
 
   function reasons(k, d) {
     // Each reason ties one of her answers to an ingredient in the recommended product
-    var r = [];
-    if (a.main === 'dandruff') r.push('<b>القشرة أو الحكة:</b> بيروكتون أولامين يساعد على إزالة القشرة ومنع عودتها، والألوفيرا يهدئ الفروة.');
-    if (a.lengths === 'dry') r.push('<b>أطرافكِ جافة وتتشابك:</b> بلسم INTENSE REPAIR يرطبها ويسهل التسريح.');
-    if (a.lengths === 'rough') r.push('<b>أطرافكِ خشنة ومتقصفة:</b> السيراميدات في البلسم تقوي الشعر وتقلل التكسر.');
-    if (k === 'scalpPack' && a.treat === 'yes') r.push('<b>الصبغة أو الفرد أو المكواة:</b> البلسم يحمي الأطوال ويقويها.');
+    var r = [], z = d.z, scalpLine = k.indexOf('scalp') === 0;
+    if (z.S) r.push('<b>القشرة أو الحكة:</b> بيروكتون أولامين يساعد على إزالة القشرة ومنع عودتها، والألوفيرا يهدئ الفروة.');
+    if (a.lengths === 'dry') r.push('<b>أطوالكِ جافة وتتشابك:</b> بلسم INTENSE REPAIR يرطبها ويسهل التسريح.');
+    if (a.lengths === 'rough') r.push('<b>أطوالكِ خشنة ومتقصفة:</b> السيراميدات في البلسم تقوي الشعر وتقلل التكسر.');
     if (k === 'scalpSolo') r.push('<b>أطوالكِ ناعمة:</b> الشامبو وحده يكفي.');
 
     if (a.fallKind === 'whole') r.push('<b>شعرات كاملة تسقط من الجذر:</b> مستخلص الثوم في الشامبو يقوي الجذور ويساعد على تقليل التساقط.');
-    if (a.fallKind === 'broken') r.push('<b>قطع مكسورة:</b> هذا تكسر وليس تساقطاً من الجذر، والماسك يقوي الشعر ويقلل التكسر.');
+    if (a.fallKind === 'broken') r.push('<b>قطع قصيرة مكسورة:</b> هذا تكسر وليس تساقطاً من الجذر، والماسك يقوي الشعر ويقلل التكسر.');
     if (a.thinner === 'yes') r.push('<b>شعركِ أصبح أخف:</b> الكيراتين في الشامبو يقوي الشعر، والماسك يغذيه حتى الأطراف.');
-    if (a.main === 'thin') r.push('<b>شعر خفيف وضعيف:</b> الكيراتين يقوي الشعر ويمنحه مظهراً أكثف.');
-    if (a.ends === 'yes') r.push('<b>أطراف جافة أو متقصفة:</b> الماسك يغذيها بعمق ويقلل التقصف.');
-    if (k === 'shampoo' && a.main !== 'dull') r.push('<b>أطرافكِ بخير:</b> الشامبو وحده يكفي الآن.');
+    if (k === 'shampoo' && z.R) r.push('<b>الكثافة لم تتغير:</b> الشامبو وحده يكفي الآن.');
+    if (!scalpLine && has(a, 'damage')) r.push('<b>جفاف أو تقصف أو هيشان:</b> زبدة الشيا وزيت جوز الهند وفيتامين B5 تغذي الأطوال وتقلل التقصف والهيشان.');
+    if (k === 'hairPack' && z.R && z.L) r.push('<b>الجذور والأطوال معاً:</b> الشامبو يقوي الجذور، والماسك يصلح الأطوال.');
+    if (a.treat === 'yes') r.push('<b>الصبغة أو الفرد أو المكواة:</b> الكيراتين في الشامبو مثالي للشعر بعد المواد الكيميائية، والماسك يحميه.');
+    if (a.treat === 'no') r.push('<b>لا صبغة ولا فرد:</b> الماسك وحده يكفي لإصلاح الأطوال.');
 
-    if (a.main === 'damage') r.push('<b>جفاف وتقصف:</b> زبدة الشيا وفيتامين B5 يغذيان الشعر ويقللان التقصف.');
-    if (a.main === 'frizz') r.push('<b>الهيشان:</b> زيت جوز الهند يقلله، وزبدة الشيا تنعم الشعر.');
-    if (a.alsoFall === 'yes') r.push('<b>التساقط أيضاً:</b> مستخلص الثوم في الشامبو يقوي الجذور.');
-    if (k === 'hairPack' && a.treat === 'yes') r.push('<b>الصبغة أو الفرد أو المكواة:</b> الكيراتين في الشامبو مثالي للشعر بعد المواد الكيميائية.');
-
-    if (a.main === 'dull') r.push('<b>شعر باهت:</b> زيت التين الشوكي والأركان يعيدان اللمعان.');
+    if (z.D && !scalpLine) r.push('<b>شعر باهت:</b> زيت التين الشوكي والأركان يعيدان اللمعان.');
     if (a.dry === 'yes') r.push('<b>وجاف أيضاً:</b> الماسك يغذيه بعمق ويعيد له النعومة واللمعان.');
     return a.who === 'm' ? r.map(function (x) { return x.replace(/كِ/g, 'ك'); }) : r;
   }
@@ -434,8 +444,16 @@ var TITLES = {
     hairPack: ['جذوركِ وأطوالكِ تحتاجان عناية معاً', 'الشامبو يقوي الجذور، والماسك يغذي الشعر حتى الأطراف.'],
     shampoo: ['جذوركِ تحتاج تقوية', 'يكفيكِ الآن شامبو يقوي الجذور وينقي الفروة.'],
     shampooDull: ['شعركِ يحتاج لمعاناً وحيوية', 'شامبو بزيت التين الشوكي والأركان يعيد لشعركِ لمعانه.'],
-    mask: ['أطوالكِ تحتاج تغذية وإصلاحاً', 'ماسك مغذٍّ يصلح الجفاف والتقصف ويعيد النعومة.']
+    mask: ['أطوالكِ تحتاج تغذية وإصلاحاً', 'ماسك مغذٍّ يصلح الجفاف والتقصف ويعيد النعومة.'],
+    hairPackFall: ['التساقط يحتاج عناية كاملة', 'الشامبو يقوي الجذور، والماسك يغذي الشعر ويقويه حتى الأطراف.'],
+    hairPackTreat: ['شعركِ يحتاج إصلاحاً من الداخل', 'الكيراتين في الشامبو يقوي الشعر بعد الصبغة والفرد، والماسك يصلح الأطوال.']
   };
+  function headKey(k, z) {
+    if (k === 'shampoo' && !z.R) return 'shampooDull';
+    if (k === 'hairPack' && !z.L) return 'hairPackFall';
+    if (k === 'hairPack' && !z.R) return 'hairPackTreat';
+    return k;
+  }
   var LEVEL = ['جيدة', 'تحتاج عناية', 'أولوية'];
   var mf = function (s) { return a.who === 'm' ? s.replace(/كِ/g, 'ك') : s; };
 
@@ -449,7 +467,7 @@ var TITLES = {
 
   function renderResult() {
     var k = result, p = PRODUCTS[k], d = diagnose(a), lv = d.levels;
-    var head = TITLES[k === 'shampoo' && a.main === 'dull' ? 'shampooDull' : k];
+    var head = TITLES[headKey(k, d.z)];
     var why = reasons(k, d);
     var alts = '', altTitle = '';
     if (k === 'scalpPack') { altTitle = 'تفضّل البدء بالشامبو فقط؟'; alts = altCard('scalpSolo', 'شامبو القشرة وحده'); }
